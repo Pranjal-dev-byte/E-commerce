@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+  <div class="form-group">
+    <label for="name">Username</label>
+    <input
+      class="form-control ng-untouched ng-pristine ng-valid"
+      type="text"
+      name="name"
+      id="name"
+      [(ngModel)]="person.username"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="email">E-Mail</label>
+    <input
+      class="form-control ng-valid"
+      type="email"
+      name="email"
+      id="email"
+      #email="ngModel"
+      [(ngModel)]="person.email"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      required
+    />
+    <div *ngIf="email.touched">
+      <p *ngIf="email.errors?.required">Email is a required field!</p>
+      <p *ngIf="email.errors?.pattern">This is not a valid Email!!!</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      class="form-control"
+      type="password"
+      name="password"
+      id="password"
+      #password="ngModel"
+      pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"
+      [(ngModel)]="person.password"
+      required
+    />
+  </div>
+  <div *ngIf="password.touched">
+    <p *ngIf="password.errors?.required">Password is a required field!</p>
+    <p *ngIf="password.errors?.pattern">
+      Password should be atleast 8 characters long and should contain one
+      number,one character and one special character
+    </p>
+  </div>
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>

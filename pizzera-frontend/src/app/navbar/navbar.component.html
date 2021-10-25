@@ -1,0 +1,58 @@
+<nav
+  class="d-flex space-between navbar navbar-expand-lg navbar-dark bg-dark px-4"
+>
+  <div class="container">
+    <a
+      class="navbar-brand"
+      [routerLink]="['/']"
+      routerLinkActive="router-link-active"
+      >Pizzeria</a
+    >
+    <a
+      class="navbar-brand"
+      [routerLink]="['/']"
+      routerLinkActive="router-link-active"
+      ><img src="assets/PizzeriaLogo.png" class="logo-img" alt="Error"
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/order-pizza']"
+            routerLinkActive="router-link-active"
+            >Order Pizza</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/build-pizza']"
+            routerLinkActive="router-link-active"
+            >Build Ur Pizza</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container d-flex justify-content-end">
+    <form class="form-inline my-2 my-lg-0">
+      [routerLink]="['/cart']"
+      <button class="btn btn-warning text-white my-2 my-sm-0" type="submit">
+        <i class="fa text-white fa-shopping-cart mr-2"></i>Shopping Cart
+      </button>
+    </form>
+  </div>
+</nav>

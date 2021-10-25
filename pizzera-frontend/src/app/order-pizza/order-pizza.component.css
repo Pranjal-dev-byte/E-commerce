@@ -1,0 +1,31 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-gap: 10px 5px;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fefefe;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.addcart {
+  font-size: 12px;
+}
+
+.app-border {
+  border: 1px solid orange;
+}
+
+.foodtype {
+  margin-left: 15px;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+}
+
+.nonveg {
+  background-color: red;
+}

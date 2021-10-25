@@ -1,0 +1,40 @@
+<div class="app-border">
+  <div class="container">
+    <div class="row py-3">
+      <div class="grid">
+        <div class="card" *ngFor="let item of orderPizzasData">
+          <div class="row">
+            <div class="col-sm-3">
+              <h4 class="font-weight-bold">{{ item.name }}</h4>
+
+              <div
+                class="foodtype"
+                [ngClass]="{ nonveg: item.type == 'nonveg' }"
+              ></div>
+
+              <h4 class="font-weight-bold my-4">₹ {{ item.price }}</h4>
+            </div>
+
+            <div class="col-sm-6">
+              <p>{{ item.description }}</p>
+              <p><strong>Ingredient : </strong> {{ item.ingredients }}</p>
+              <p><strong>Topping : </strong>{{ item.topping }}</p>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="text-center">
+                <img class="w-100" src="{{ item.image }}" alt="" />
+                <button
+                  class="btn btn-warning text-white my-3 addcart text-center"
+                  (click)="addToCart(item)"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

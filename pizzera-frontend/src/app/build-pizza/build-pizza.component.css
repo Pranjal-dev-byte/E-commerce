@@ -1,0 +1,33 @@
+.app-border {
+  border: 1px solid orange;
+}
+
+.ingredients {
+  width: 100px;
+}
+
+.build {
+  color: orange;
+}
+
+.table-data {
+  vertical-align: middle;
+}
+
+.buildButton {
+  text-align: center;
+}
+
+.buildButton button {
+  margin: 10px;
+  border: 2px solid orange;
+  padding: 7px;
+  background-color: black;
+  color: orange;
+  font-size: 20px;
+  border-radius: 4px;
+}
+
+tbody:nth-child(odd) {
+  background-color: #f2f2f2;
+}
