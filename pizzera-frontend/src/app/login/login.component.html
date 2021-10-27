@@ -1,8 +1,9 @@
-<form (ngSubmit)="onSubmit(userLoginForm)" #userLoginForm="ngForm">
+<form (ngSubmit)="onSubmit(userLoginForm)" #userLoginForm="ngForm" class="form">
+  <h1 class="mb-3">Login to pizzera</h1>
   <div class="form-group">
     <label for="email">E-Mail</label>
     <input
-      class="form-control ng-valid"
+      class="form-control form-field ng-valid"
       type="email"
       name="email"
       id="email"
@@ -19,7 +20,7 @@
   <div class="form-group">
     <label for="password">Password</label>
     <input
-      class="form-control"
+      class="form-control form-field"
       type="password"
       name="password"
       id="password"
@@ -35,6 +36,18 @@
       Password should be atleast 8 characters long and should contain one
       number,one character and one special character
     </p>
+    <p *ngIf="errorMsg">{{ errorMsg }}</p>
   </div>
-  <button type="submit" [disabled]="userLoginForm.invalid">Submit</button>
+
+  <button
+    type="submit"
+    class="btn btn-primary m-3"
+    [disabled]="userLoginForm.invalid"
+  >
+    Submit
+  </button>
+  <div class="d-flex">
+    <p>New to pizzera?&nbsp;</p>
+    <a [routerLink]="['/register']">Create a new account</a>
+  </div>
 </form>

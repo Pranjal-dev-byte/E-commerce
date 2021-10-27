@@ -48,11 +48,31 @@
     </div>
   </div>
   <div class="container d-flex justify-content-end">
-    <form class="form-inline my-2 my-lg-0">
+    <button
       [routerLink]="['/cart']"
-      <button class="btn btn-warning text-white my-2 my-sm-0" type="submit">
-        <i class="fa text-white fa-shopping-cart mr-2"></i>Shopping Cart
+      class="btn btn-warning text-white my-2 my-sm-0"
+    >
+      <i class="fa text-white fa-shopping-cart mr-2"></i>Shopping Cart
+    </button>
+    <div
+      class="form-inline my-2 my-lg-0"
+      *ngIf="loggeddIn; then thenBlock; else elseBlock"
+    ></div>
+    <ng-template #elseBlock>
+      <button
+        [routerLink]="['/login']"
+        class="btn btn-primary mx-2 text-white my-2 my-sm-0"
+      >
+        Log In/Sign Up
       </button>
-    </form>
+    </ng-template>
+    <ng-template #thenBlock>
+      <button
+        (click)="logout()"
+        class="btn btn-primary mx-2 text-white my-2 my-sm-0"
+      >
+        Logout
+      </button>
+    </ng-template>
   </div>
 </nav>

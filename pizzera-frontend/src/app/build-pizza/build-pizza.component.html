@@ -15,7 +15,9 @@
               <td><img class="ingredients" src="{{ list.image }}" alt="" /></td>
 
               <td class="font-weight-bold table-data">
-                <div>{{ list.tname }} &nbsp; ₹ {{ list.price }}</div>
+                <div>
+                  {{ list.tname }} &nbsp; {{ list.price | currency: "INR" }}
+                </div>
               </td>
 
               <td class="table-data">
@@ -42,8 +44,7 @@
           </tbody>
         </table>
 
-        <div class="total">Total Cost: {{ total }}</div>
-
+        <div class="total">Total Cost: {{ total | currency: "INR" }}</div>
         <div class="buildButton">
           <button>Build Ur Pizza</button>
         </div>

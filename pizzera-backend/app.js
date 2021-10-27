@@ -45,6 +45,22 @@ app.get("/ingredients", (req, res) => {
   Ingredients.find().then((result) => res.json(result));
 });
 
+app.get("/cart", async (req, res) => {
+  console.log(req.query.email);
+  // if (req.query.email) {
+  const email = req.query.email;
+  await Users.find({ email }).then((result) => res.json(result));
+  // } else {
+  // }
+});
+
+// app.delete("/cart", async (req, res) => {
+//   const id = req.query.id;
+//   Favorite.updateOne( {id: id}, { $pullAll: {id: [req.params.id] } } )
+
+//   await Users.deleteOne({ id: id }).then((result) => res.json(result)); // returns {deletedCount: 1}
+// });
+// /
 app.post("/register", async (req, res) => {
   try {
     // Get user input
@@ -113,6 +129,35 @@ app.post("/login", async (req, res) => {
       return res.status(200).json(user);
     }
     return res.status(400).send("Invalid Credentials");
+  } catch (err) {
+    console.log(err);
+  }
+  // Our register logic ends here
+});
+
+app.put("/cart", async (req, res) => {
+  // Our login logic starts here
+  try {
+    // Get user input
+    // console.log(req.body);
+    const { cart, email } = req.body;
+    // for (let order of cart) {
+    //   console.log(order);
+    //   // for(let )
+    // }
+    if (!email) {
+      return res.status(400).send("Not able to fetch the email!");
+    }
+    if (!cart) {
+      return res.status(400).send("The cart is empty!");
+    }
+    // const doc = await User.findOne({email});
+    try {
+      await Users.updateOne({ email }, { cart });
+    } catch (err) {
+      console.log(err);
+    }
+    return res.status(200).json(cart);
   } catch (err) {
     console.log(err);
   }

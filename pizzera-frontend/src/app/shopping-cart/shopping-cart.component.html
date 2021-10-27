@@ -1,1 +1,36 @@
-<button type="submit" (click)="checkout()">Checkout</button>
+<div class="container p-3" style="width: 60%">
+  <div
+    class="cart-item d-flex justify-content-between align-items-center my-3"
+    *ngFor="let cartItem of cart; let i = index"
+  >
+    <div class="">
+      <img src="{{ cartItem.image }}" class="cart-item--img" alt="" />
+    </div>
+
+    <div class="d-flex flex-column" style="width: 30%">
+      <p class="cart-item--name">{{ cartItem.name || cartItem.tname }}</p>
+
+      <p class="cart-item--name d-flex">
+        {{ cartItem.price | currency: "INR" }}
+      </p>
+      <div
+        class="btn btn-danger"
+        style="width: 90px"
+        (click)="deleteItem(i, cartItem.price)"
+      >
+        Delete
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center m-3">
+    Total Cost: {{ total | currency: "INR" }}
+  </div>
+  <div class="d-flex justify-content-center m-3">
+    <button class="btn btn-primary mx-2" [routerLink]="['/login']">
+      CheckIn
+    </button>
+    <button class="btn btn-primary mx-2" type="submit" (click)="checkout()">
+      Checkout
+    </button>
+  </div>
+</div>

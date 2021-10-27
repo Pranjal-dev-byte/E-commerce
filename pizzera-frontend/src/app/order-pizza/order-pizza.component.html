@@ -12,7 +12,9 @@
                 [ngClass]="{ nonveg: item.type == 'nonveg' }"
               ></div>
 
-              <h4 class="font-weight-bold my-4">₹ {{ item.price }}</h4>
+              <h4 class="font-weight-bold my-4">
+                {{ item.price | currency: "INR" }}
+              </h4>
             </div>
 
             <div class="col-sm-6">
