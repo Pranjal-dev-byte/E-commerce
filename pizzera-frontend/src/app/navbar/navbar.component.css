@@ -1,3 +1,28 @@
 .logo-img {
   width: 66px;
 }
+.img-container {
+  width: 40%;
+}
+.cart-hover {
+  position: absolute;
+  /* height: 300px; */
+  /* overflow-y: scroll; */
+  top: 35px;
+  width: 300px;
+  right: 80px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+}
+.cart-hover--container {
+  position: relative;
+}
+.cart-item--img {
+  width: 100%;
+  /* width: 20%;
+  height: 20%; */
+}
+p {
+  margin: 0 !important;
+}

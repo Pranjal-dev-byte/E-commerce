@@ -9,6 +9,7 @@ import { PizzasDataService } from '../pizzas-data.service';
 export class OrderPizzaComponent implements OnInit {
   orderPizzasData: any;
   orderArr: any = [];
+  added = false;
   constructor(private pizzasData: PizzasDataService) {}
 
   ngOnInit(): void {
@@ -22,5 +23,6 @@ export class OrderPizzaComponent implements OnInit {
     this.orderArr.push(item);
     localStorage.setItem('cartOrderItems', JSON.stringify(this.orderArr));
     console.log(this.orderArr);
+    item.added = true;
   }
 }

@@ -12,7 +12,6 @@ export class ShoppingCartComponent implements OnInit {
   email: any;
   total = 0;
   cartOrderItems: any = [];
-
   cartBuildItems: any = [];
   cart: any;
   cartActual: any = [];
@@ -72,8 +71,12 @@ export class ShoppingCartComponent implements OnInit {
       this.total = 0;
       for (let cartItem of this.cart) {
         // this.cart.push(cartItem);
-        this.total += cartItem.price;
-        console.log(cartItem.price);
+        if (cartItem['quantity']) {
+          this.total += cartItem.price * cartItem.quantity;
+          console.log(cartItem.price);
+        } else {
+          this.total += cartItem.price;
+        }
       }
       if (this._token) {
         console.log(this.cart);
@@ -92,9 +95,28 @@ export class ShoppingCartComponent implements OnInit {
     console.log(this.cart.length);
     this.total -= price;
     this.syncDb();
-    // this.pizzaDataService.deleteCartItem(idx).subscribe((res) => {
-    //   console.log(res);
-    // });
   }
   checkout() {}
+  increaseQuant(id: number, cartItem: any) {
+    if (cartItem['quantity']) {
+      cartItem['quantity']++;
+    } else {
+      cartItem['quantity'] = 1;
+    }
+    // obj.key3 = "value3";
+    this.cart[id].quantity = cartItem['quantity'];
+    // this.cart[id].append({ quantity: cartItem['quantity'] });
+    this.syncDb();
+  }
+  decreaseQuant(id: number, cartItem: any) {
+    if (cartItem['quantity'] && cartItem['quantity'] != 1) {
+      cartItem['quantity']--;
+    } else {
+      cartItem['quantity'] = 1;
+    }
+    // obj.key3 = "value3";
+    this.cart[id].quantity = cartItem['quantity'];
+    // this.cart[id].append({ quantity: cartItem['quantity'] });
+    this.syncDb();
+  }
 }

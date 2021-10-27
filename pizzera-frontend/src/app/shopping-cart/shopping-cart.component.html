@@ -9,7 +9,15 @@
 
     <div class="d-flex flex-column" style="width: 30%">
       <p class="cart-item--name">{{ cartItem.name || cartItem.tname }}</p>
-
+      <div class="cart-item--quantity d-flex align-items-center">
+        <button class="btn btn-primary" (click)="increaseQuant(i, cartItem)">
+          <i class="fas fa-plus"></i>
+        </button>
+        <p class="p-1 mt-3">{{ cartItem.quantity || 1 }}</p>
+        <button class="btn btn-primary" (click)="decreaseQuant(i, cartItem)">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
       <p class="cart-item--name d-flex">
         {{ cartItem.price | currency: "INR" }}
       </p>

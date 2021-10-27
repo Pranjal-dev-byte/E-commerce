@@ -26,12 +26,23 @@
             <div class="col-sm-3">
               <div class="text-center">
                 <img class="w-100" src="{{ item.image }}" alt="" />
-                <button
-                  class="btn btn-warning text-white my-3 addcart text-center"
-                  (click)="addToCart(item)"
-                >
-                  Add to Cart
-                </button>
+                <div *ngIf="!item.added; then thenBlock; else elseBlock"></div>
+                <ng-template #thenBlock>
+                  <button
+                    class="btn btn-warning text-white my-3 addcart text-center"
+                    (click)="addToCart(item)"
+                  >
+                    Add to Cart
+                  </button>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <button
+                    #elseBlock
+                    class="btn btn-primary text-white my-3 addcart text-center"
+                  >
+                    Added
+                  </button>
+                </ng-template>
               </div>
             </div>
           </div>

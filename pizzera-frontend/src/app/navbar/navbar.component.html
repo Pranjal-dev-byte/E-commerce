@@ -47,13 +47,36 @@
       </ul>
     </div>
   </div>
-  <div class="container d-flex justify-content-end">
+  <div class="cart-hover--container container d-flex justify-content-end">
     <button
+      (mouseover)="onHover()"
+      (mouseleave)="showButton = false"
       [routerLink]="['/cart']"
       class="btn btn-warning text-white my-2 my-sm-0"
     >
       <i class="fa text-white fa-shopping-cart mr-2"></i>Shopping Cart
     </button>
+    <div class="cart-hover" *ngIf="showButton">
+      <h3 class="text-center mt-2 mb-1">Cart Contents</h3>
+      <div
+        class="cart-item d-flex justify-content-around align-items-center my-3"
+        *ngFor="let cartItem of cart; let i = index"
+      >
+        <div class="img-container">
+          <img src="{{ cartItem.image }}" class="cart-item--img" alt="" />
+        </div>
+
+        <div class="d-flex flex-column" style="width: 30%">
+          <p class="cart-item--name">{{ cartItem.name || cartItem.tname }}</p>
+          <div class="cart-item--quantity d-flex align-items-center">
+            <p class="p-1 mt-3">{{ cartItem.quantity || 1 }}</p>
+          </div>
+          <p class="cart-item--name d-flex">
+            {{ cartItem.price | currency: "INR" }}
+          </p>
+        </div>
+      </div>
+    </div>
     <div
       class="form-inline my-2 my-lg-0"
       *ngIf="loggeddIn; then thenBlock; else elseBlock"
