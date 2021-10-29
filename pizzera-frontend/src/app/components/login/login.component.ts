@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginRegisterService } from '../login-register.service';
+import { LoginRegisterService } from '../../services/login-register.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,6 @@ export class LoginComponent implements OnInit {
     email: '',
   };
   errorMsg = '';
-  @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
-
   constructor(
     private loginRegister: LoginRegisterService,
     public router: Router

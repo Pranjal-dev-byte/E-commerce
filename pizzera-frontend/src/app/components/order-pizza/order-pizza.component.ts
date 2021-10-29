@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PizzasDataService } from '../pizzas-data.service';
+import { CartServiceService } from 'src/app/services/cart-service.service';
+import { PizzasDataService } from '../../services/pizzas-data.service';
 
 @Component({
   selector: 'app-order-pizza',
@@ -10,7 +11,10 @@ export class OrderPizzaComponent implements OnInit {
   orderPizzasData: any;
   orderArr: any = [];
   added = false;
-  constructor(private pizzasData: PizzasDataService) {}
+  constructor(
+    private pizzasData: PizzasDataService,
+    private cartService: CartServiceService
+  ) {}
 
   ngOnInit(): void {
     this.pizzasData.getOrderPizzaData().subscribe((data: any) => {
@@ -23,6 +27,9 @@ export class OrderPizzaComponent implements OnInit {
     this.orderArr.push(item);
     localStorage.setItem('cartOrderItems', JSON.stringify(this.orderArr));
     console.log(this.orderArr);
+    this.cartService.sendOrderToCart(
+      JSON.parse(localStorage.getItem('cartOrderItems') || '{}')
+    );
     item.added = true;
   }
 }

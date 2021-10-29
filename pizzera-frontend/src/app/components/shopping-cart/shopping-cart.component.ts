@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PizzasDataService } from '../pizzas-data.service';
+import { CartServiceService } from 'src/app/services/cart-service.service';
+import { PizzasDataService } from '../../services/pizzas-data.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,7 +8,10 @@ import { PizzasDataService } from '../pizzas-data.service';
   styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  constructor(private pizzaDataService: PizzasDataService) {}
+  constructor(
+    private pizzaDataService: PizzasDataService,
+    private cartService: CartServiceService
+  ) {}
   _token: boolean = false;
   email: any;
   total = 0;
@@ -93,6 +97,7 @@ export class ShoppingCartComponent implements OnInit {
   deleteItem(idx: any, price: number) {
     console.log(this.cart.splice(idx, 1));
     console.log(this.cart.length);
+    this.cartService.sendOrderToCart(this.cart);
     this.total -= price;
     this.syncDb();
   }

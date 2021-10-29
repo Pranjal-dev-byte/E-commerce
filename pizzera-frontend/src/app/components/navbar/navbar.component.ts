@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PizzasDataService } from '../pizzas-data.service';
+import { CartServiceService } from 'src/app/services/cart-service.service';
+import { PizzasDataService } from '../../services/pizzas-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +11,30 @@ import { PizzasDataService } from '../pizzas-data.service';
 export class NavbarComponent implements OnInit {
   loggeddIn: boolean = false;
   showButton: boolean = false;
+  emptyCart = false;
+  subscription: Subscription;
   email: any;
   cartOrderItems: any = [];
   cartBuildItems: any = [];
   cart: any;
   cartActual: any = [];
-  constructor(private pizzaDataService: PizzasDataService) {}
+  constructor(
+    private pizzaDataService: PizzasDataService,
+    private cartService: CartServiceService
+  ) {
+    this.subscription = this.cartService
+      .getOrderFromCart()
+      .subscribe((orderArr) => {
+        if (orderArr) {
+          this.cartOrderItems = orderArr;
+        }
+      });
+  }
   ngOnInit(): void {
     // console.log(event);
+    this.getCartDetails();
+  }
+  getCartDetails() {
     this.loggeddIn = localStorage.getItem('token') ? true : false;
     console.log(this.loggeddIn);
     // console.log(localStorage.getItem('token'));
@@ -28,6 +45,7 @@ export class NavbarComponent implements OnInit {
     this.cartBuildItems = JSON.parse(
       localStorage.getItem('cartBuildItems') || '{}'
     );
+
     console.log(this.cartOrderItems);
     if (
       Object.entries(this.cartBuildItems).length === 0 &&
@@ -53,6 +71,7 @@ export class NavbarComponent implements OnInit {
       this.pizzaDataService.getCartData(this.email).subscribe((res: any) => {
         // console.log(res);
         for (let cartItem of res[0].cart) {
+          this.emptyCart = false;
           if (!(Object.entries(cartItem).length === 0)) {
             this.cart.push(cartItem);
             // this.total += cartItem.price;
@@ -66,6 +85,13 @@ export class NavbarComponent implements OnInit {
     this.cart = this.cart.filter(
       (value: any) => Object.keys(value).length !== 0
     );
+    console.log(this.cart);
+    if (this.cart.length === 0) {
+      this.emptyCart = true;
+      console.log(this.emptyCart);
+    } else {
+      this.emptyCart = false;
+    }
   }
   // ngOnChanges() {
   //   console.log('Changed');
@@ -76,6 +102,18 @@ export class NavbarComponent implements OnInit {
     this.loggeddIn = false;
   }
   onHover() {
+    this.cart = [];
+    this.getCartDetails();
+    this.subscription = this.cartService
+      .getOrderFromCart()
+      .subscribe((orderArr) => {
+        if (orderArr) {
+          this.cartOrderItems = orderArr;
+        }
+      });
+    // if (!this.email) {
+    //   this.cart = [];
+    // }
     // window.location.reload();
     this.showButton = true;
   }

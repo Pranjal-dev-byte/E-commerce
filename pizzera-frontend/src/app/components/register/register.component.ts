@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginRegisterService } from '../login-register.service';
+import { LoginRegisterService } from '../../services/login-register.service';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
     password: '',
     email: '',
   };
+  emailExists = '';
   constructor(
     private loginRegister: LoginRegisterService,
     private router: Router
@@ -20,13 +21,18 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
   onSubmit(form: any) {
-    this.loginRegister.registerUser(form.value).subscribe((res: any) => {
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('email', res.email);
-      this.router.navigate(['/']).then(() => {
-        window.location.reload();
-      });
-    });
+    this.loginRegister.registerUser(form.value).subscribe(
+      (res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('email', res.email);
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
+      },
+      (err) => {
+        this.emailExists = 'User Already Exist. Please Login!';
+      }
+    );
     // console.log(form.value);
     // console.log(person);
   }

@@ -26,6 +26,7 @@
     <div *ngIf="email.touched">
       <p *ngIf="email.errors?.required">Email is a required field!</p>
       <p *ngIf="email.errors?.pattern">This is not a valid Email!!!</p>
+      <p *ngIf="emailExists">User Already Exist. Please Login</p>
     </div>
   </div>
   <div class="form-group">

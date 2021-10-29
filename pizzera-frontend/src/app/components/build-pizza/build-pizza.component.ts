@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PizzasDataService } from '../pizzas-data.service';
+import { PizzasDataService } from '../../services/pizzas-data.service';
 
 @Component({
   selector: 'app-build-pizza',

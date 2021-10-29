@@ -57,7 +57,11 @@
       <i class="fa text-white fa-shopping-cart mr-2"></i>Shopping Cart
     </button>
     <div class="cart-hover" *ngIf="showButton">
+      <!--  -->
       <h3 class="text-center mt-2 mb-1">Cart Contents</h3>
+      <div *ngIf="emptyCart">
+        <p class="text-center p-2">The cart is empty!</p>
+      </div>
       <div
         class="cart-item d-flex justify-content-around align-items-center my-3"
         *ngFor="let cartItem of cart; let i = index"
